@@ -4,16 +4,15 @@
 <title>MutationInitialiser</title>
 <script src="../index.js"></script>
 <style>
-.red {
-    color: red;
+.green {
+    color: green;
 }
 </style>
 <script>
 
-
-const options = { subtree: true, many: true };
+const options = { subtree: true };
 const observer = new MutationInitaliser('li', (node) => {
-    node.classList.add('red');
+    node.classList.add('green');
 }, options);
 observer.observe(document);
 
@@ -31,15 +30,12 @@ let interval = setInterval(() => {
 <body>
 
 <p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
-<p>Disconnect observer after DOM loaded.</p>
-<p>Behaves like a loader. Only initialises elements while the DOM is loading.</p>
-<p>Checks <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState"><code>readyState</code></a>
-    and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event"><code>DOMContentLoaded</code> event</a>.</p>
+<p>Default example. Only one element is initialised, and only until the DOM has finished loading.
+This is the most restrictive option-set.</p>
 
 <ul id="list">
-    <li>Red.</li>
-    <li>Red.</li>
-    <li>Red (loaded with page.)</li>
+    <li>Green</li>
+    <li>Black</li>
 </ul>
 
 </body>

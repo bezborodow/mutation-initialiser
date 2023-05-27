@@ -10,14 +10,16 @@
 </style>
 <script>
 
-new MutationInitaliser('li', (node) => {
+const options = { subtree: true, watch: true, many: true };
+const observer = new MutationInitaliser('li', (node) => {
     node.classList.add('red');
-}).observe();
+}, options);
+observer.observe(document);
 
 let i = 0;
 let interval = setInterval(() => {
     let li = document.createElement('li');
-    li.textContent = 'Hi ' + (i+1);
+    li.textContent = 'Red ' + (i+1);
     document.getElementById('list').appendChild(li);
 
     if (++i >= 10) clearInterval(interval);
@@ -27,14 +29,14 @@ let interval = setInterval(() => {
 </head>
 <body>
 
-<p>Default options.</p>
+<p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
 <p>Basic example. Elements are initialised as they are added to the
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM</a>.</p>
 
 <p>List items should appear red.</p>
 
 <ul id="list">
-    <li>Hello</li>
+    <li>Red</li>
 </ul>
 
 </body>

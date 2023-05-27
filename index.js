@@ -2,11 +2,14 @@ class MutationInitaliser {
   constructor(selector, callback, options = {}) {
     this.selector = selector;
     this.callback = callback;
-    options.subtree ??= true;
+    this.options = Object.assign({}, options);
+    this.options.subtree ??= false;
+    this.options.watch ??= false;
+    this.options.many ??= false;
+    this.options.scope ??= 0;
     if (!options.childList || !options.attributes || !options.characterData) {
-      options.childList = true;
+      this.options.childList = true;
     }
-    this.options = options;
     this.observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (mutation.type === 'childList') {
@@ -22,26 +25,41 @@ class MutationInitaliser {
     });
   }
   call(element) {
-    if (this.options.unique) {
+    if (!this.enabled) {
+      return;
+    }
+
+    this.callback(element);
+
+    if (!this.options.many) {
+      // Disconnect after first call if many is not specified.
       this.disconnect();
     }
-    this.callback(element);
   }
-  observe(target = document) {
+  observe(target) {
+    this.enabled = true;
     const matches = target.querySelectorAll(this.selector);
     for (const match of matches) {
       this.call(match);
     }
-    if (!this.options.loader || document.readyState == 'loading') {
-      this.observer.observe(target, this.options);
-      if (this.options.loader) {
-        window.addEventListener('DOMContentLoaded', () => {
-          this.disconnect();
-        });
-      }
+
+    if (!this.options.watch && document.readyState != 'loading') {
+      // Document is already finished loading. Do not observe when not watching.
+      this.enabled = false;
+      return
+    }
+
+    this.observer.observe(target, this.options);
+
+    if (!this.options.watch) {
+      // If not watching, disconnect after DOM is loaded.
+      window.addEventListener('DOMContentLoaded', () => {
+        this.disconnect();
+      });
     }
   }
   disconnect() {
+    this.enabled = false;
     this.observer.disconnect();
   }
   takeRecords() {

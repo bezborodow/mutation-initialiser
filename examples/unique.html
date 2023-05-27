@@ -10,9 +10,11 @@
 </style>
 <script>
 
-new MutationInitaliser('li', (node) => {
+const options = { subtree: true, watch: true };
+const observer = new MutationInitaliser('li', (node) => {
     node.classList.add('blue');
-}, { unique: true }).observe();
+}, options);
+observer.observe(document);
 
 let i = 0;
 let interval = setInterval(() => {
@@ -27,7 +29,7 @@ let interval = setInterval(() => {
 </head>
 <body>
 
-<p><code>unique</code> option.</p>
+<p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
 
 <p>Disconnect observer after the first element is matched.</p>
 
