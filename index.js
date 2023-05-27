@@ -41,13 +41,20 @@ class MutationInitaliser {
   observe(target) {
     this.enabled = true;
 
-    const matches = target.querySelectorAll(this.selector);
-    for (const match of matches) {
-      this.call(match);
-    }
-
-    if (!this.enabled) {
-      return;
+    // First pass. Find matches already on the page.
+    if (this.options.subtree) {
+      const matches = target.querySelectorAll(this.selector);
+      for (const match of matches) {
+        this.call(match);
+        if (!this.enabled) return;
+      }
+    } else {
+      for (const child of target.children) {
+        if (child.matches(this.selector)) {
+          this.call(child);
+          if (!this.enabled) return;
+        }
+      }
     }
 
     if (!this.options.watch && document.readyState != 'loading') {

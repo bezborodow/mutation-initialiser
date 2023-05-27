@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>MutationInitialiser</title>
+<script src="../index.js"></script>
+<style>
+.orange {
+    color: orange;
+}
+</style>
+</head>
+<body>
+
+<p>Subtree option should be consistent when loading on first pass.</p>
+
+<div id="target">
+    <p>Children:</p>
+    <ul>
+        <li>Orange</li>
+        <li>Orange</li>
+    </ul>
+    <ul>
+        <li>Black</li>
+        <li>Black</li>
+    </ul>
+    <p>Grandchildren:</p>
+    <div>
+        <ul>
+            <li>Black</li>
+            <li>Black</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+
+const options = { subtree: false, many: false };
+const observer = new MutationInitaliser('ul', (node) => {
+    node.classList.add('orange');
+}, options);
+observer.observe(document.getElementById('target'));
+
+</script>
+
+</body>
+</html>
