@@ -38,9 +38,7 @@ class MutationInitialiser {
       this.disconnect();
     }
   }
-  observe(target) {
-    this.enabled = true;
-
+  firstPass(target) {
     // First pass. Find matches already on the page.
     if (this.options.subtree) {
       const matches = target.querySelectorAll(this.selector);
@@ -56,10 +54,16 @@ class MutationInitialiser {
         }
       }
     }
+  }
+  observe(target) {
+    this.enabled = true;
+
+    this.firstPass(target);
+
+    if (!this.enabled) return;
 
     if (!this.options.watch && document.readyState != 'loading') {
       // Document is already finished loading. Do not observe when not watching.
-      this.enabled = false;
       return;
     }
 
