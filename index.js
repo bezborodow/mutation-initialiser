@@ -17,6 +17,8 @@ class MutationInitaliser {
             if (addedNode instanceof HTMLElement) {
               if (addedNode.matches(this.selector)) {
                 this.call(addedNode);
+
+                if (!this.enabled) return;
               }
             }
           }
@@ -38,15 +40,20 @@ class MutationInitaliser {
   }
   observe(target) {
     this.enabled = true;
+
     const matches = target.querySelectorAll(this.selector);
     for (const match of matches) {
       this.call(match);
     }
 
+    if (!this.enabled) {
+      return;
+    }
+
     if (!this.options.watch && document.readyState != 'loading') {
       // Document is already finished loading. Do not observe when not watching.
       this.enabled = false;
-      return
+      return;
     }
 
     this.observer.observe(target, this.options);

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>MutationInitialiser</title>
+<script src="../index.js"></script>
+<style>
+.red {
+    color: red;
+}
+</style>
+<script>
+
+new MutationInitaliser('#list', (list) => {
+    new MutationInitaliser('li', (li) => {
+        li.classList.add('red');
+    }, { watch: true, many: true }).observe(list);
+}, { subtree: true }).observe(document);
+
+let i = 0;
+let interval = setInterval(() => {
+    let li = document.createElement('li');
+    li.textContent = 'Red ' + (i+1);
+    document.getElementById('list').appendChild(li);
+
+    if (++i >= 10) clearInterval(interval);
+}, 1000);
+
+</script>
+</head>
+<body>
+
+<p>Advanced example, nested.</p>
+
+<p>List items should appear red.</p>
+
+<ul id="list">
+    <li>Red</li>
+</ul>
+
+</body>
+</html>
