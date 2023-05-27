@@ -1,4 +1,4 @@
-class MutationInitaliser {
+class MutationInitialiser {
   constructor(selector, callback, options = {}) {
     this.selector = selector;
     this.callback = callback;
@@ -81,10 +81,10 @@ class MutationInitaliser {
   }
 }
 
-class CompoundMutationInitaliser extends MutationInitaliser {
+class CompoundMutationInitialiser extends MutationInitialiser {
   constructor(parentSelector, selector, callback, parentOptions, options) {
     super(parentSelector, (parent) => {
-      const initialiser = new MutationInitaliser(selector, callback, options);
+      const initialiser = new MutationInitialiser(selector, callback, options);
       initialiser.observe(parent);
     }, parentOptions);
   }

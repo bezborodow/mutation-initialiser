@@ -10,8 +10,8 @@
 </style>
 <script>
 
-new MutationInitaliser('#list', (list) => {
-    new MutationInitaliser('li', (li) => {
+new MutationInitialiser('#list', (list) => {
+    new MutationInitialiser('li', (li) => {
         li.classList.add('red');
     }, { watch: true, many: true }).observe(list);
 }, { subtree: true }).observe(document);

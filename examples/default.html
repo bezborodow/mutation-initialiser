@@ -11,10 +11,10 @@
 <script>
 
 const options = { subtree: true };
-const observer = new MutationInitaliser('li', (node) => {
+const initialiser = new MutationInitialiser('li', (node) => {
     node.classList.add('green');
 }, options);
-observer.observe(document);
+initialiser.observe(document);
 
 let i = 0;
 let interval = setInterval(() => {

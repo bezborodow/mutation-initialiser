@@ -35,10 +35,10 @@
 <script>
 
 const options = { subtree: false, many: false };
-const observer = new MutationInitaliser('ul', (node) => {
+const initialiser = new MutationInitialiser('ul', (node) => {
     node.classList.add('orange');
 }, options);
-observer.observe(document.getElementById('target'));
+initialiser.observe(document.getElementById('target'));
 
 </script>
 

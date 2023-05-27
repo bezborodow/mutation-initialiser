@@ -9,7 +9,7 @@
 }
 </style>
 <script>
-initialiser = new CompoundMutationInitaliser('#list','li', (li) => {
+initialiser = new CompoundMutationInitialiser('#list','li', (li) => {
     li.classList.add('red');
     console.log(li.textContent);
 }, { subtree: true }, { watch: true, many: true });
