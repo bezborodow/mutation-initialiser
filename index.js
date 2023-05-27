@@ -13,7 +13,7 @@ class MutationInitaliser {
           for (const addedNode of mutation.addedNodes) {
             if (addedNode instanceof HTMLElement) {
               if (addedNode.matches(this.selector)) {
-                this.callback(addedNode);
+                this.call(addedNode);
               }
             }
           }
@@ -21,10 +21,16 @@ class MutationInitaliser {
       }
     });
   }
+  call(element) {
+    if (this.options.unique) {
+      this.disconnect();
+    }
+    this.callback(element);
+  }
   observe(target = document) {
     const matches = target.querySelectorAll(this.selector);
     for (const match of matches) {
-      this.callback(match);
+      this.call(match);
     }
     if (!this.options.loader || document.readyState == 'loading') {
       this.observer.observe(target, this.options);

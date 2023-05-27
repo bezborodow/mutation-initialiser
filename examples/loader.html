@@ -27,8 +27,11 @@ let interval = setInterval(() => {
 </head>
 <body>
 
-<p><code>loader</code> option. Behaves like a loader. Only initialises elements while the DOM is loading.</p>
+<p><code>loader</code> option.</p>
 <p>Disconnect observer after DOM loaded.</p>
+<p>Behaves like a loader. Only initialises elements while the DOM is loading.</p>
+<p>Checks <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState"><code>readyState</code></a>
+    and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event"><code>DOMContentLoaded</code> event</a>.</p>
 
 <ul id="list">
     <li>Red (loaded with page.)</li>

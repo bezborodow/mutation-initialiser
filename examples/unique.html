@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>MutationInitialiser</title>
+<script src="../index.js"></script>
+<style>
+.blue {
+    color: blue;
+}
+</style>
+<script>
+
+new MutationInitaliser('li', (node) => {
+    node.classList.add('blue');
+}, { unique: true }).observe();
+
+let i = 0;
+let interval = setInterval(() => {
+    let li = document.createElement('li');
+    li.textContent = i ? 'Black ' + (i) : 'Blue';
+    document.getElementById('list').appendChild(li);
+
+    if (++i > 10) clearInterval(interval);
+}, 1000);
+
+</script>
+</head>
+<body>
+
+<p><code>unique</code> option.</p>
+
+<p>Disconnect observer after the first element is matched.</p>
+
+<p>Useful if there is only one of an element on the page, such as with an
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors">ID selector</a>.</p>
+
+<ul id="list">
+</ul>
+
+</body>
+</html>
