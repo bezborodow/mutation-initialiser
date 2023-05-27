@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>MutationInitialiser</title>
+<script src="../index.js"></script>
+<script>
+
+const initialise = defaultInitialiser(document, { subtree: true });
+
+initialise('select', (select) => {
+    select.addEventListener('change', (e) => {
+        const input = document.getElementById(select.getAttribute('for'));
+        input.value = select.value;
+        select.value = null;
+    });
+});
+
+</script>
+</head>
+<body>
+
+<p>Select events example.</p>
+
+<input type="text" id="selection" />
+
+<select for="selection">
+    <option></option>
+    <option>A001</option>
+    <option>B002</option>
+    <option>C003</option>
+</select>
+
+</body>
+</html>
