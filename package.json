@@ -1,0 +1,28 @@
+{
+  "name": "@dbezborodov/mutation-initialiser",
+  "version": "0.0.1",
+  "description": "Initialise elements when inserted into the DOM using MutationObserver.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bezborodow/mutation-initialiser.git"
+  },
+  "keywords": [
+    "mutationobserver",
+    "initialise",
+    "initialize",
+    "events"
+  ],
+  "author": "Damien Bezborodov",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/bezborodow/mutation-initialiser/issues"
+  },
+  "homepage": "https://github.com/bezborodow/mutation-initialiser#readme"
+}
