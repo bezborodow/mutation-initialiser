@@ -1,7 +1,11 @@
 class MutationInitaliser {
-  constructor(selector, callback, options = { subtree: true, childList: true }) {
+  constructor(selector, callback, options = {}) {
     this.selector = selector;
     this.callback = callback;
+    options.subtree ??= true;
+    if (!options.childList || !options.attributes || !options.characterData) {
+      options.childList = true;
+    }
     this.options = options;
     this.observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
@@ -22,7 +26,14 @@ class MutationInitaliser {
     for (const match of matches) {
       this.callback(match);
     }
-    this.observer.observe(target, this.options);
+    if (!this.options.loader || document.readyState == 'loading') {
+      this.observer.observe(target, this.options);
+      if (this.options.loader) {
+        window.addEventListener('DOMContentLoaded', () => {
+          this.disconnect();
+        });
+      }
+    }
   }
   disconnect() {
     this.observer.disconnect();
