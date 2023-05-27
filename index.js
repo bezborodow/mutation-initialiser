@@ -89,3 +89,14 @@ class CompoundMutationInitialiser extends MutationInitialiser {
     }, parentOptions);
   }
 }
+
+function defaultInitialiser(defaultTarget, defaultOptions) {
+  return (selector, callback, options = {}) => {
+    const initialiser = new MutationInitialiser(selector,
+      callback, Object.assign(defaultOptions, options));
+
+    initialiser.observe(defaultTarget);
+
+    return initialiser;
+  }
+}
