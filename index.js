@@ -73,3 +73,12 @@ class MutationInitaliser {
     return this.observer.takeRecords();
   }
 }
+
+class CompoundMutationInitaliser extends MutationInitaliser {
+  constructor(parentSelector, selector, callback, parentOptions, options) {
+    super(parentSelector, (parent) => {
+      const initialiser = new MutationInitaliser(selector, callback, options);
+      initialiser.observe(parent);
+    }, parentOptions);
+  }
+}
