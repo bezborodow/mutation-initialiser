@@ -69,15 +69,15 @@ class MutationInitialiser {
     if (!this.#enabled) return;
 
     if (!this.#options.watch) {
-      if (document.readyState != 'loading') {
-        // Document is already finished loading. Do not observe when not watching.
-        return;
-      }
-
       // If not watching, disconnect after DOM is loaded.
       window.addEventListener('DOMContentLoaded', () => {
         this.disconnect();
       });
+
+      if (document.readyState != 'loading') {
+        // Document is already finished loading. Do not observe when not watching.
+        return;
+      }
     }
 
     this.#observer.observe(target, this.#options);
