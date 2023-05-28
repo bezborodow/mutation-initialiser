@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
 <title>MutationInitialiser</title>
-<script src="../index.js"></script>
 <script>
 
-const initialise = defaultInitialiser(document, { subtree: true });
-
-initialise('select[for]', (select) => {
-    select.addEventListener('change', (e) => {
+document.addEventListener('change', (e) => {
+    if (e.target.matches('select[for]')) {
+        let select = e.target;
         const input = document.getElementById(select.getAttribute('for'));
         input.value = select.value;
         select.value = null;
-    });
+    }
 });
 
 </script>
