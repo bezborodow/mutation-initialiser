@@ -1,6 +1,6 @@
 {
   "name": "mutation-initialiser",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Initialise elements when inserted into the DOM using MutationObserver.",
   "main": "index.js",
   "directories": {
@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/bezborodow/mutation-initialiser/issues"
   },
-  "homepage": "https://github.com/bezborodow/mutation-initialiser#readme"
+  "homepage": "https://github.com/bezborodow/mutation-initialiser#readme",
+  "files": [
+      "index.js"
+  ]
 }
