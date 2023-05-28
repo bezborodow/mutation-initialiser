@@ -101,11 +101,11 @@ class CompoundMutationInitialiser extends MutationInitialiser {
 }
 
 function defaultInitialiser(defaultTarget, defaultOptions) {
-  return (selector, callback, options = {}) => {
+  return (selector, callback, options = {}, target = defaultTarget) => {
     const initialiser = new MutationInitialiser(selector,
       callback, Object.assign(defaultOptions, options));
 
-    initialiser.observe(defaultTarget);
+    initialiser.observe(target);
 
     return initialiser;
   }
