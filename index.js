@@ -13,21 +13,34 @@ export default class MutationInitialiser {
     this.#options.watch ??= false;
     this.#options.many ??= false;
     this.#options.scope ??= 0;
-    this.#observer = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.type === 'childList') {
-          for (const addedNode of mutation.addedNodes) {
-            if (addedNode instanceof HTMLElement) {
-              if (addedNode.matches(this.#selector)) {
-                this.#call(addedNode);
-
-                if (!this.#enabled) return;
-              }
-            }
+    this.#observer = new MutationObserver(this.#mutation);
+  }
+  #mutation(mutations) {
+    for (const mutation of mutations)
+      if (mutation.type === 'childList')
+        for (const addedNode of mutation.addedNodes)
+          if (addedNode instanceof HTMLElement) {
+            this.#find(addedNode, this.#selector);
+            if (!this.#enabled) return;
           }
-        }
+  }
+  #find(element, selector) {
+    let match = element.closest(this.#selector);
+    if (match) {
+      this.#call(match);
+      if (!this.#enabled) return;
+    }
+    if (this.#options.many) {
+      const matches = element.querySelectorAll(this.#selector);
+      for (const match of matches) {
+        this.#call(match);
       }
-    });
+    } else {
+      match = element.querySelector(this.#selector);
+      if (match) {
+        this.#call(match);
+      }
+    }
   }
   #call(element) {
     if (!this.#enabled) {
@@ -41,28 +54,11 @@ export default class MutationInitialiser {
       this.disconnect();
     }
   }
-  #firstPass(target) {
-    // First pass. Find matches already on the page.
-    if (this.#options.subtree) {
-      const matches = target.querySelectorAll(this.#selector);
-      for (const match of matches) {
-        this.#call(match);
-        if (!this.#enabled) return;
-      }
-    } else {
-      for (const child of target.children) {
-        if (child.matches(this.#selector)) {
-          this.#call(child);
-          if (!this.#enabled) return;
-        }
-      }
-    }
-  }
   observe(target) {
     this.#enabled = true;
 
-    this.#firstPass(target);
-
+    // First Pass.
+    this.#find(target, this.#selector);
     if (!this.#enabled) return;
 
     if (!this.#options.watch) {

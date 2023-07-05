@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <title>MutationInitialiser</title>
-<script src="../index.js"></script>
+<script src="../index.js" type="module"></script>
 <style>
 .orange {
     color: orange;
@@ -32,7 +32,8 @@
     </div>
 </div>
 
-<script>
+<script type="module">
+import MutationInitialiser from '../index.js';
 
 const options = { subtree: false, many: false };
 const initialiser = new MutationInitialiser('ul', (node) => {

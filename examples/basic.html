@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
 <title>MutationInitialiser</title>
-<script src="../index.js"></script>
+<script src="../index.js" type="module"></script>
 <style>
 .red {
     color: red;
 }
 </style>
-<script>
+<script type="module">
+import MutationInitialiser from '../index.js';
 
-const options = { subtree: true, watch: true, many: true };
+const options = { childList: true, subtree: true, watch: true, many: true };
 const initialiser = new MutationInitialiser('li', (node) => {
     node.classList.add('red');
 }, options);
@@ -29,7 +30,6 @@ let interval = setInterval(() => {
 </head>
 <body>
 
-<p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
 <p>Basic example. Elements are initialised as they are added to the
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">DOM</a>.</p>
 
