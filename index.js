@@ -1,4 +1,4 @@
-class MutationInitialiser {
+export default class MutationInitialiser {
   #selector;
   #callback;
   #options;
@@ -91,7 +91,7 @@ class MutationInitialiser {
   }
 }
 
-class CompoundMutationInitialiser extends MutationInitialiser {
+export class CompoundMutationInitialiser extends MutationInitialiser {
   constructor(parentSelector, selector, callback, parentOptions, options) {
     super(parentSelector, (parent) => {
       const initialiser = new MutationInitialiser(selector, callback, options);
@@ -100,7 +100,7 @@ class CompoundMutationInitialiser extends MutationInitialiser {
   }
 }
 
-function defaultInitialiser(defaultTarget, defaultOptions) {
+export function defaultInitialiser(defaultTarget, defaultOptions) {
   return (selector, callback, options = {}, target = defaultTarget) => {
     const initialiser = new MutationInitialiser(selector,
       callback, Object.assign(defaultOptions, options));
