@@ -13,9 +13,6 @@ export default class MutationInitialiser {
     this.#options.watch ??= false;
     this.#options.many ??= false;
     this.#options.scope ??= 0;
-    if (!options.childList || !options.attributes || !options.characterData) {
-      this.#options.childList = true;
-    }
     this.#observer = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (mutation.type === 'childList') {
