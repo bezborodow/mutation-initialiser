@@ -57,23 +57,20 @@ export default class MutationInitialiser {
   observe(target) {
     this.#enabled = true;
 
-    // First Pass.
-    this.#find(target, this.#selector);
-    if (!this.#enabled) return;
-
+    // If not watching, disconnect after DOM is loaded.
     if (!this.#options.watch) {
-      // If not watching, disconnect after DOM is loaded.
       window.addEventListener('DOMContentLoaded', () => {
         this.disconnect();
       });
-
-      if (document.readyState != 'loading') {
-        // Document is already finished loading. Do not observe when not watching.
-        return;
-      }
     }
 
-    this.#observer.observe(target, this.#options);
+    // Observe while loading or if always watching.
+    if (document.readyState == 'loading' || #this.options.watch) {
+      this.#observer.observe(target, this.#options);
+    }
+
+    // First Pass.
+    this.#find(target, this.#selector);
   }
   disconnect() {
     this.#enabled = false;
