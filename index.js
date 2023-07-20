@@ -65,7 +65,7 @@ export default class MutationInitialiser {
     }
 
     // Observe while loading or if always watching.
-    if (document.readyState == 'loading' || #this.options.watch) {
+    if (document.readyState == 'loading' || this.#options.watch) {
       this.#observer.observe(target, this.#options);
     }
 

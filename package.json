@@ -1,6 +1,6 @@
 {
   "name": "mutation-initialiser",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Initialise elements when inserted into the DOM using MutationObserver.",
   "main": "index.js",
   "directories": {
