@@ -25,18 +25,22 @@ export default class MutationInitialiser {
           }
   }
   #find(element, selector) {
-    let match = element.closest(this.#selector);
-    if (match) {
-      this.#call(match);
-      if (!this.#enabled) return;
+    if (element.closest) {
+      const match = element.closest(this.#selector);
+      if (match) {
+        this.#call(match);
+      }
     }
+
+    if (!this.#enabled) return;
+
     if (this.#options.many) {
       const matches = element.querySelectorAll(this.#selector);
       for (const match of matches) {
         this.#call(match);
       }
     } else {
-      match = element.querySelector(this.#selector);
+      const match = element.querySelector(this.#selector);
       if (match) {
         this.#call(match);
       }
