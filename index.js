@@ -13,18 +13,19 @@ export default class MutationInitialiser {
     this.#options.watch ??= false;
     this.#options.many ??= false;
     this.#options.scope ??= 0;
-    this.#observer = new MutationObserver(this.#mutation);
+    this.#observer = new MutationObserver(this.#mutation.bind(this));
   }
   #mutation(mutations) {
     for (const mutation of mutations)
       if (mutation.type === 'childList')
         for (const addedNode of mutation.addedNodes)
           if (addedNode instanceof HTMLElement) {
-            this.#find(addedNode, this.#selector);
+            console.log(this);
+            this.#find(addedNode);
             if (!this.#enabled) return;
           }
   }
-  #find(element, selector) {
+  #find(element) {
     if (element.closest) {
       const match = element.closest(this.#selector);
       if (match) {
@@ -74,7 +75,7 @@ export default class MutationInitialiser {
     }
 
     // First Pass.
-    this.#find(target, this.#selector);
+    this.#find(target);
   }
   disconnect() {
     this.#enabled = false;
