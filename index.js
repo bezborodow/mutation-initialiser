@@ -4,6 +4,7 @@ export default class MutationInitialiser {
   #options;
   #enabled;
   #observer;
+  #seen;
 
   constructor(selector, callback, options = {}) {
     this.#selector = selector;
@@ -14,13 +15,13 @@ export default class MutationInitialiser {
     this.#options.many ??= false;
     this.#options.scope ??= 0;
     this.#observer = new MutationObserver(this.#mutation.bind(this));
+    this.#seen = [];
   }
   #mutation(mutations) {
     for (const mutation of mutations)
       if (mutation.type === 'childList')
         for (const addedNode of mutation.addedNodes)
           if (addedNode instanceof HTMLElement) {
-            console.log(this);
             this.#find(addedNode);
             if (!this.#enabled) return;
           }
@@ -51,6 +52,12 @@ export default class MutationInitialiser {
     if (!this.#enabled) {
       return;
     }
+
+    // Call only once.
+    if (this.#seen.indexOf(element) != -1) {
+      return;
+    }
+    this.#seen.push(element);
 
     this.#callback(element);
 
