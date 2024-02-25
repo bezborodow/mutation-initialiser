@@ -32,13 +32,11 @@ let interval = setInterval(() => {
     if (++i >= 10) clearInterval(interval);
 }, 1000);
 
-document.body.dataset.options = options; // For illustration.
-
 </script>
 </head>
 <body>
 
-<p>Options: <code><script>document.write(JSON.stringify(document.body.dataset.options))</script></code>.</p>
+<p>Options: <code><script>document.write(JSON.stringify({ subtree: true }))</script></code>.</p>
 <p>Default example. Only one element is initialised, and only until the DOM has finished loading.
 This is the most restrictive option-set.</p>
 
