@@ -14,7 +14,7 @@ import { CompoundMutationInitialiser } from '../index.js';
 const initialiser = new CompoundMutationInitialiser('#list','li', (li) => {
     li.classList.add('red');
     console.log(li.textContent);
-}, { subtree: true }, { watch: true, many: true });
+}, { childList: true, subtree: true, watch: true, many: true });
 initialiser.observe(document);
 
 let i = 0;
