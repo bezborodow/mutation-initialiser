@@ -11,7 +11,7 @@
 <script type="module">
 import MutationInitialiser from '../index.js';
 
-const options = { subtree: true, watch: true };
+const options = { childList: true, subtree: true, watch: true };
 const initialiser = new MutationInitialiser('li', (node) => {
     node.classList.add('blue');
 }, options);
@@ -29,8 +29,6 @@ let interval = setInterval(() => {
 </script>
 </head>
 <body>
-
-<p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
 
 <p>Disconnect observer after the first element is matched.</p>
 
