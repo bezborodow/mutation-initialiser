@@ -13,6 +13,7 @@ import MutationInitialiser from '../index.js';
 
 const options = {
     subtree: true,
+    childList: true,
 };
 
 const initialiser = new MutationInitialiser('li', (node) => {
@@ -36,7 +37,7 @@ let interval = setInterval(() => {
 </head>
 <body>
 
-<p>Options: <code><script>document.write(JSON.stringify({ subtree: true }))</script></code>.</p>
+<p>Options: <code><script>document.write(JSON.stringify({ childList: true, subtree: true }))</script></code>.</p>
 <p>Default example. Only one element is initialised, and only until the DOM has finished loading.
 This is the most restrictive option-set.</p>
 
