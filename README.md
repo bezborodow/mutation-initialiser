@@ -12,8 +12,10 @@ per a given
 [selector](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors)
 as they are inserted into the Document Object Model
 ([DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)).
-Common use case is to attach events listeners, add CSS classes, or set other
-HTML element attributes once an element has been loaded into the DOM.
+Common use case is to attach [event
+listeners](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener),
+add CSS classes, or set other HTML element attributes once an element has been
+loaded into the DOM.
 
 ```javascript
 import { defaultInitialiser } from 'mutation-initialiser';
