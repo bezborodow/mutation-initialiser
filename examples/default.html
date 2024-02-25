@@ -11,12 +11,18 @@
 <script type="module">
 import MutationInitialiser from '../index.js';
 
-const options = { subtree: true };
+const options = {
+    subtree: true,
+};
+
 const initialiser = new MutationInitialiser('li', (node) => {
     node.classList.add('green');
 }, options);
+
+// Observe document.
 initialiser.observe(document);
 
+// Timer simulation.
 let i = 0;
 let interval = setInterval(() => {
     let li = document.createElement('li');
@@ -26,11 +32,13 @@ let interval = setInterval(() => {
     if (++i >= 10) clearInterval(interval);
 }, 1000);
 
+document.body.dataset.options = options; // For illustration.
+
 </script>
 </head>
 <body>
 
-<p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
+<p>Options: <code><script>document.write(JSON.stringify(document.body.dataset.options))</script></code>.</p>
 <p>Default example. Only one element is initialised, and only until the DOM has finished loading.
 This is the most restrictive option-set.</p>
 

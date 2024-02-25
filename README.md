@@ -22,7 +22,7 @@ const initialise = defaultInitialiser(document, {
   subtree: true,
   many: true,
   attributes: true,
-  watch: true
+  watch: true,
 });
 
 initialise('div.example', element => {
