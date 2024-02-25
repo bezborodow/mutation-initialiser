@@ -9,7 +9,7 @@
 }
 </style>
 <script type="module">
-import MutationInitialiser from '../index.js';
+import { defaultInitialiser } from 'mutation-initialiser';
 
 const options = { subtree: true };
 const initialise = defaultInitialiser(document, options);
@@ -33,7 +33,7 @@ let interval = setInterval(() => {
 
 <p>Default Initialiser</p>
 
-<p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
+<p>Options: <code><script>document.write(JSON.stringify({ subtree: true }))</script></code>.</p>
 <p>Default example. Only one element is initialised, and only until the DOM has finished loading.
 This is the most restrictive option-set.</p>
 

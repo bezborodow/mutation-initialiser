@@ -30,7 +30,7 @@ let interval = setInterval(() => {
 </head>
 <body>
 
-<p>Options: <code><script>document.write(JSON.stringify(options))</script></code>.</p>
+<p>Options: <code><script>document.write(JSON.stringify({ subtree: true, many: true }))</script></code>.</p>
 <p>Disconnect observer after DOM loaded.</p>
 <p>Behaves like a loader. Only initialises elements while the DOM is loading.</p>
 <p>Checks <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/readyState"><code>readyState</code></a>

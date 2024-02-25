@@ -9,9 +9,9 @@
 }
 </style>
 <script type="module">
-import MutationInitialiser from '../index.js';
+import { CompoundMutationInitialiser } from '../index.js';
 
-initialiser = new CompoundMutationInitialiser('#list','li', (li) => {
+const initialiser = new CompoundMutationInitialiser('#list','li', (li) => {
     li.classList.add('red');
     console.log(li.textContent);
 }, { subtree: true }, { watch: true, many: true });
