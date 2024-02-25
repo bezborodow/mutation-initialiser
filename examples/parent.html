@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <title>MutationInitialiser</title>
-<script src="../index.js"></script>
+<script src="../index.js" type="module"></script>
 <style>
 .red {
     color: red;
 }
 </style>
-<script>
+<script type="module">
+import MutationInitialiser from '../index.js';
 
 new MutationInitialiser('#list', (list) => {
     new MutationInitialiser('li', (li) => {
