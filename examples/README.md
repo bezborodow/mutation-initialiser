@@ -10,6 +10,6 @@
  * [Loader](./loader.html)
  * [Parent compound](./parent-compound.html)
  * [Parent](./parent.html)
- * [Select even delegation](./select-event-delegation.html)
+ * [Select event delegation](./select-event-delegation.html)
  * [Select](./select.html)
  * [Unique](./unique.html)
